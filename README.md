@@ -1,2 +1,1 @@
-# empty
-empty repository with only a readme
+Final class project. Creating a working bidirectional weighted graph with testing. 
