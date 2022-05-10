@@ -1,6 +1,8 @@
-/* 
- * Final Assignment
- */
+/***************************************************************
+* Name: Graziella Buitron
+* Coding Final
+* Purpose: Create a working bi-directional weighted graph class
+***************************************************************/
 
 #ifndef DATA_H
 #define DATA_H
@@ -8,15 +10,18 @@
 #include "string"
 using std::string;
 
-struct Data {
-    int id;
-    string data;
+struct Edge {
+    int fromVertex;
+    int toVertex;
+    //string data;
 };
 
-struct Node {
-    Data data;
-    Node *next;
-    Node *prev;
+struct Vertex {
+    int numEdges;
+    Edge edge;
+    int id;
+    //Node *next;
+    //Node *prev;
 };
 
 #endif /* DATA_H */

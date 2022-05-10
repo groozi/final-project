@@ -10,10 +10,13 @@
 #include <iostream>     /* cout, endl */
 //#include <stdlib.h>     /* srand, rand */
 //#include <time.h>       /* time */
-
+#include <vector>
 #include "data.h"
+#include "graph.h"
 
 using std::cout;
 using std::endl;
+using std::vector;
+
 
 #endif /* MAIN_H */
