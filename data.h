@@ -10,18 +10,22 @@
 #include "string"
 using std::string;
 
-struct Edge {
+struct VertWithEdge {
     int fromVertex;
     int toVertex;
+    int weight;
+    VertWithEdge *next;
+    VertWithEdge *prev;
+
+
     //string data;
 };
 
 struct Vertex {
     int numEdges;
-    Edge edge;
+    VertWithEdge *head;
     int id;
-    //Node *next;
-    //Node *prev;
+
 };
 
 #endif /* DATA_H */

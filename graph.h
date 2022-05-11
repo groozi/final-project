@@ -7,12 +7,12 @@
 #define GRAPH_H
 
 #include <vector>
-//#include <iostream>
+#include <iostream>
 #include "data.h"
 #define MIN_SIZE 2
 
-//using std::cout;
-//using std::endl;
+using std::cout;
+using std::endl;
 using std::vector;
 
 class Graph{
@@ -30,19 +30,20 @@ public:
     bool removeVertex(int);
     bool getVertex(int, Vertex*);
     void printGraph(); 
+    bool exists(int id);
 
 
     
 private:
 
    vector<Vertex> *vertexVector; 
-   //Vertex *bidGraph;
    int vertexCount;
    int edgeCount;
    Vertex* row;
    Vertex* col;
    int rowCount;
    int colCount;
+   //bool exists(int id);
 };
 
 #endif //STACK_H
