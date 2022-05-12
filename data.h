@@ -10,12 +10,12 @@
 #include "string"
 using std::string;
 
-struct VertWithEdge {
+struct EdgePair {
     int fromVertex;
     int toVertex;
     int weight;
-    VertWithEdge *next;
-    VertWithEdge *prev;
+    EdgePair *next;
+    EdgePair *prev;
 
 
     //string data;
@@ -23,7 +23,7 @@ struct VertWithEdge {
 
 struct Vertex {
     int numEdges;
-    VertWithEdge *head;
+    EdgePair *head;
     int id;
 
 };

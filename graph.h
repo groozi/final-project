@@ -18,19 +18,19 @@ using std::vector;
 class Graph{
 
 public:
-    Graph();
+    Graph(); //done
     ~Graph();
-    bool isEmpty();
-    int getVertexCount();
-    int getEdgeCount();
+    bool isEmpty(); //done
+    int getVertexCount(); //done
+    int getEdgeCount(); //returns count of edges in entire graph done
     bool hasEdge(int, int);
-    bool addEdge(int, int, int);
-    bool removeEdge(int, int);
-    bool addVertex(int);
-    bool removeVertex(int);
+    bool addEdge(int, int, int); //done
+    bool removeEdge(int, int); 
+    bool addVertex(int); //done
+    bool removeVertex(int); //done
     bool getVertex(int, Vertex*);
-    void printGraph(); 
-    bool exists(int id);
+    void printGraph(); //done
+    bool exists(int id); //done
 
 
     
@@ -39,11 +39,14 @@ private:
    vector<Vertex> *vertexVector; 
    int vertexCount;
    int edgeCount;
-   Vertex* row;
-   Vertex* col;
-   int rowCount;
-   int colCount;
+   //Vertex* row;
+   //Vertex* col;
+   //int rowCount;
+   //int colCount;
    //bool exists(int id);
+   int findIndex(int id); //done
+   //void prepEdgePair(int, int, int, EdgePair**);
+
 };
 
 #endif //STACK_H

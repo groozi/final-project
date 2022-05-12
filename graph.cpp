@@ -31,12 +31,16 @@ Graph::~Graph(){
 bool Graph::isEmpty(){
 	bool flag = false;
 
+	if(getVertexCount() < 1){
+		flag = true;
+	}
+
 	return flag;
 }
 
 int Graph::getVertexCount(){
-	vertexCount = vertexVector->size();
-	return vertexCount;
+	//vertexCount = vertexVector->size();
+	return vertexVector->size();
 }
 
 int Graph::getEdgeCount(){
@@ -53,37 +57,122 @@ bool Graph::addEdge(int vert1, int vert2, int weight){
 	bool success = false;
 	int currentEdges = edgeCount;
 
+	//checks if edges between vertices already exist in the graph
 	if (exists(vert1) && exists(vert2)){
 
-		if (vertexVector->at(vert1-1).head == NULL){
-			VertWithEdge *newVertEdge = new VertWithEdge;
-			newVertEdge->fromVertex = vert1;
-			newVertEdge->toVertex = vert2;
-			newVertEdge->weight = weight;
-			newVertEdge->prev = NULL;
-			newVertEdge->next = NULL;
-			vertexVector->at(vert1-1).head = newVertEdge;
+		EdgePair *current = vertexVector->at(findIndex(vert1)).head;
+		//EdgePair **edgeHolder;
+
+		if (current == NULL){
+			//prepEdgePair(vert1, vert2, weight, *edgeHolder);
+			
+			EdgePair *newEdgePair = new EdgePair;
+			newEdgePair->fromVertex = vert1;
+			newEdgePair->toVertex = vert2;
+			newEdgePair->weight = weight;
+			newEdgePair->next = NULL;
+			newEdgePair->prev = NULL;
+
+			vertexVector->at(findIndex(vert1)).head = newEdgePair;
+			/*
+			edgeHolder->next = NULL;
+		
+			vertexVector->at(findIndex(vert1)).head = *edgeHolder;
+			*/
 			edgeCount++;
 			
 			if (edgeCount > currentEdges){
 				success = true;
 			}
+		} else{		
 
-			//cout << "empty here" << endl;
-		} else{
-			cout << "not added" << endl;
+			//will not move to next if vert2 is in list already and if next points to null
+			while (current->toVertex != vert2 && current->next){
+				current = current->next;
+            }
+
+            if (current->toVertex != vert2 && current->next == NULL){
+            	//prepEdgePair(vert1, vert2, weight, *edgeHolder);
+            	
+            	EdgePair *newEdgePair = new EdgePair;
+				newEdgePair->fromVertex = vert1;
+				newEdgePair->toVertex = vert2;
+				newEdgePair->weight = weight;
+				newEdgePair->next = NULL;
+				
+
+				newEdgePair->prev = current;
+				current->next = newEdgePair;
+
+            	//&edgeHolder->prev = current;
+            	//current->next = *edgeHolder;
+
+				edgeCount++;
+
+				if (edgeCount > currentEdges){
+					success = true;
+				}
+            }
 		}
-
 		success = true;
-
 	}
-
-
 	return success;
 }
 
 bool Graph::removeEdge(int vert1, int vert2){
 	bool success = false;
+	int currentSize = edgeCount;
+
+	EdgePair *current = vertexVector->at(findIndex(vert1)).head;
+
+	//if there are edges in the linkedlist of the starting vertex
+	if(current != NULL){
+
+		//find where the edge you're deleting is in the linked list. goes through list stopping if you find vert1 or before going off end of list
+		while(current->toVertex != vert2 && current->next){
+			current = current->next;
+		}
+
+		cout << "current stopped at edge pair" << current->fromVertex << " to " << current->toVertex << "! " << endl;
+
+		//confirming correct edge to delete was found
+		if(current->fromVertex == vert1 && current->toVertex == vert2){
+
+			//removing edge when it's the only one in the adjacency list
+			if(current->prev == NULL && current->next == NULL){
+				delete(current);
+				edgeCount--;
+				vertexVector->at(findIndex(vert1)).head = NULL;
+
+			//removing edge from beginning of list
+			}else if(current->prev == NULL){
+				vertexVector->at(findIndex(vert1)).head = current->next;
+				current->next->prev = NULL;
+				delete(current);
+				edgeCount--;
+			//removing edge at the end of list
+			}else if(current->next == NULL){
+				current->prev->next = NULL;
+				delete(current);
+				edgeCount--;
+			//removing edge from middle of adjacency list
+			}else if(current->next != NULL){
+				current->prev->next = current->next;
+				current->next->prev = current->prev;
+				delete(current);
+				edgeCount--;
+			}
+			
+			if(edgeCount < currentSize){
+				success = true;
+			}
+		}
+
+		
+	}
+
+
+
 
 	return success;
 }
@@ -100,13 +189,20 @@ bool Graph::addVertex(int id){
 
 	if(vertexVector->size() > currentSize){
 		success = true;
+		vertexCount++;
 	}
-	
 	return success;
 }
 
 bool Graph::removeVertex(int id){
 	bool success = false;
+	int prevCount = getVertexCount();
+
+	vertexVector->pop_back();
+
+	if (prevCount < getVertexCount()){
+		success = true;
+	}
 
 	return success;
 }
@@ -118,39 +214,32 @@ bool Graph::getVertex(int id, Vertex* fillVert){
 }
 
 void Graph::printGraph(){
+	cout << "current edge count " << edgeCount << endl;
 	
 	for (int i = 0; i < vertexVector->size(); i++){
 		cout << "vertex " << vertexVector->at(i).id << ": ";
 
-		VertWithEdge *current = vertexVector->at(i).head;
+		EdgePair *current = vertexVector->at(i).head;
 
-		if (current){
-			//cout << "edges exists here" << endl;
-
-			cout << "edge to vertex " << current->toVertex << " with weight " << current->weight << endl;
-
+		if (current == NULL){
+			cout << "no edges from this vertex" << endl;
+		} else{
 			while (current){
+				cout << "edge with vertex " << current->toVertex << " (weight: " << current->weight << ")";
+
+				if (current->next != NULL){
+                    cout << " -> "; 
+                } else{
+                    cout << endl;
+                }
 				current = current->next;
 			}
-
-			/*
-			cout << ": edge from " << vertexVector->at(i).id << " to " << vertexVector->at(i).head->next->toVertex;
-
-			while (current){
-
-			 current = current->next;
-			}
-			*/
-
-		}else{
-			cout << "no edges from this vertex" << endl;
 		}
 
 	}
-	
-	return;
+		return;
 }
-
+	
 bool Graph::exists(int id){
 	bool vertFound = false;
 
@@ -163,5 +252,26 @@ bool Graph::exists(int id){
 	return vertFound;
 }
 
+int Graph::findIndex(int id){
+	int index;
 
+	for(int i = 0; i < vertexVector->size(); i++){
+
+		if (vertexVector->at(i).id == id){
+			index = i;
+		}
+	}
+	return index;
+}
+
+/*
+void Graph::prepEdgePair(int vert1, int vert2, int weight, EdgePair** edgeHolder){
+	EdgePair *newEdgePair = new EdgePair;
+	newEdgePair->fromVertex = vert1;
+	newEdgePair->toVertex = vert2;
+	newEdgePair->weight = weight;
+	newEdgePair->next = NULL;
+	*edgeHolder = newEdgePair;
+}
+*/
 
