@@ -8,14 +8,8 @@
 
 Graph::Graph(){
 	vertexVector = new vector<Vertex>;
-	/*
-	row = NULL;
-	col = NULL;
 	vertexCount = 0;
 	edgeCount = 0;
-	rowCount = 0;
-	colCount = 0;
-	*/
 }
 
 Graph::~Graph(){
@@ -154,7 +148,7 @@ bool Graph::removeEdge(int vert1, int vert2){
 			current = current->next;
 		}
 
-		cout << "current stopped at edge pair" << current->fromVertex << " to " << current->toVertex << "! " << endl;
+		//cout << "current stopped at edge pair" << current->fromVertex << " to " << current->toVertex << "! " << endl;
 
 		//confirming correct edge to delete was found
 		if(current->fromVertex == vert1 && current->toVertex == vert2){

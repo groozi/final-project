@@ -16,9 +16,6 @@ struct EdgePair {
     int weight;
     EdgePair *next;
     EdgePair *prev;
-
-
-    //string data;
 };
 
 struct Vertex {

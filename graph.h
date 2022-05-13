@@ -28,11 +28,14 @@ public:
     bool removeEdge(int, int); //done
     bool addVertex(int); //done
     bool removeVertex(int); //done
-    bool getVertex(int, Vertex*); 
+    bool getVertex(int, Vertex*); //done
     void printGraph(); //done
-    bool exists(int id); //done
+    bool exists(int); //done
+    void bFirst(int); //breadth first traversal
+    void dFirst(int);  //depth first traversal 
 
-  
+
+
 
     
 private:
@@ -40,10 +43,6 @@ private:
    vector<Vertex> *vertexVector; 
    int vertexCount;
    int edgeCount;
-   //Vertex* row;
-   //Vertex* col;
-   //int rowCount;
-   //int colCount;
    //bool exists(int id);
    int findIndex(int id); //done
    //void prepEdgePair(int, int, int, EdgePair**);
