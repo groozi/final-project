@@ -22,7 +22,7 @@ struct EdgePair {
 };
 
 struct Vertex {
-    int numEdges;
+    int numEdges; //must account for adding edges to vertex
     EdgePair *head;
     int id;
 

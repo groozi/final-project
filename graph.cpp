@@ -48,9 +48,23 @@ int Graph::getEdgeCount(){
 }
 
 bool Graph::hasEdge(int vert1, int vert2){
-	bool exists = false;
+	bool flag = false;
 
-	return exists;
+	if (exists(vert1) && exists(vert2)){
+
+		EdgePair *current = vertexVector->at(findIndex(vert1)).head;
+
+		while(current->toVertex != vert2 && current->next){
+			current = current->next;
+		}
+
+		if(current->fromVertex == vert1 && current->toVertex == vert2){
+			flag = true;
+		}
+
+	}
+
+	return flag;
 }
 
 bool Graph::addEdge(int vert1, int vert2, int weight){
@@ -60,7 +74,8 @@ bool Graph::addEdge(int vert1, int vert2, int weight){
 	//checks if edges between vertices already exist in the graph
 	if (exists(vert1) && exists(vert2)){
 
-		EdgePair *current = vertexVector->at(findIndex(vert1)).head;
+		int index = findIndex(vert1);
+		EdgePair *current = vertexVector->at(index).head;
 		//EdgePair **edgeHolder;
 
 		if (current == NULL){
@@ -73,16 +88,20 @@ bool Graph::addEdge(int vert1, int vert2, int weight){
 			newEdgePair->next = NULL;
 			newEdgePair->prev = NULL;
 
-			vertexVector->at(findIndex(vert1)).head = newEdgePair;
+
+
+			vertexVector->at(index).head = newEdgePair;
 			/*
 			edgeHolder->next = NULL;
 		
 			vertexVector->at(findIndex(vert1)).head = *edgeHolder;
 			*/
 			edgeCount++;
+			vertexVector->at(index).numEdges++;
 			
 			if (edgeCount > currentEdges){
 				success = true;
+
 			}
 		} else{		
 
@@ -108,6 +127,7 @@ bool Graph::addEdge(int vert1, int vert2, int weight){
             	//current->next = *edgeHolder;
 
 				edgeCount++;
+				vertexVector->at(index).numEdges++;
 
 				if (edgeCount > currentEdges){
 					success = true;
@@ -122,8 +142,9 @@ bool Graph::addEdge(int vert1, int vert2, int weight){
 bool Graph::removeEdge(int vert1, int vert2){
 	bool success = false;
 	int currentSize = edgeCount;
+	int index = findIndex(vert1);
 
-	EdgePair *current = vertexVector->at(findIndex(vert1)).head;
+	EdgePair *current = vertexVector->at(index).head;
 
 	//if there are edges in the linkedlist of the starting vertex
 	if(current != NULL){
@@ -143,7 +164,6 @@ bool Graph::removeEdge(int vert1, int vert2){
 				delete(current);
 				edgeCount--;
 				vertexVector->at(findIndex(vert1)).head = NULL;
-
 			//removing edge from beginning of list
 			}else if(current->prev == NULL){
 				vertexVector->at(findIndex(vert1)).head = current->next;
@@ -162,17 +182,13 @@ bool Graph::removeEdge(int vert1, int vert2){
 				delete(current);
 				edgeCount--;
 			}
-			
+		
 			if(edgeCount < currentSize){
 				success = true;
+				vertexVector->at(index).numEdges--;
 			}
 		}
-
-		
 	}
-
-
-
 
 	return success;
 }
@@ -208,7 +224,32 @@ bool Graph::removeVertex(int id){
 }
 
 bool Graph::getVertex(int id, Vertex* fillVert){
-	bool success;
+	bool success = false;
+	cout << "entered method" << endl;
+
+	if(exists(id)){
+
+		int index = findIndex(id);
+		cout << "id exists in vector" << endl;
+		cout << "index is " << index << endl;
+
+		if(vertexVector->at(index).id == id){
+			cout << "entered. current id at index is " << vertexVector->at(index).id << "~ id: " << id << endl;
+			fillVert->id = vertexVector->at(index).id;
+			cout << "fillVert id is " << fillVert->id << endl;
+			fillVert->numEdges = vertexVector->at(index).numEdges;
+			fillVert->head = vertexVector->at(index).head;
+			success = true;
+		}
+
+	} else{
+		cout << "id not in vector" << endl;
+		fillVert->id = -1;
+		fillVert->head = NULL;
+		fillVert->numEdges = 0;
+	}
+	//EdgePair *current = vertexVector->at(findIndex(id)).head;
+
 
 	return success;
 }
@@ -243,12 +284,14 @@ void Graph::printGraph(){
 bool Graph::exists(int id){
 	bool vertFound = false;
 
-	for (int i = 0; i < vertexVector->size(); i++){
-		if (vertexVector->at(i).id == id){
-			vertFound = true;
+	//only check through vector for vertex if id number is valid
+	if(id > 0){
+		for (int i = 0; i < vertexVector->size(); i++){
+			if (vertexVector->at(i).id == id){
+				vertFound = true;
+			}
 		}
 	}
-
 	return vertFound;
 }
 

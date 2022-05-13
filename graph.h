@@ -23,15 +23,16 @@ public:
     bool isEmpty(); //done
     int getVertexCount(); //done
     int getEdgeCount(); //returns count of edges in entire graph done
-    bool hasEdge(int, int);
+    bool hasEdge(int, int); //done
     bool addEdge(int, int, int); //done
-    bool removeEdge(int, int); 
+    bool removeEdge(int, int); //done
     bool addVertex(int); //done
     bool removeVertex(int); //done
-    bool getVertex(int, Vertex*);
+    bool getVertex(int, Vertex*); 
     void printGraph(); //done
     bool exists(int id); //done
 
+  
 
     
 private:

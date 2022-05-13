@@ -143,5 +143,45 @@ cout << endl;
 	cout << endl;
 
 
+	cout << "testing hasEdge... seeing if edge exists from vertex 2 to 3" << endl;
+
+	if(graph.hasEdge(2, 3)){
+		cout << "graph has edge" << endl;
+	} else{
+		cout << "graph does not have edge" << endl;
+	}
+
+	cout << endl;
+	cout << "printing current contents... " << endl;
+	graph.printGraph();
+	cout << endl;
+
+	cout << "testing hasEdge for edge that does not exist. checking for edge from vertex 5 to 1" << endl;
+
+	if(graph.hasEdge(5, 1)){
+		cout << "graph has edge" << endl;
+	} else{
+		cout << "graph does not have edge" << endl;
+	}
+
+	Vertex newVert;
+	
+
+	cout << "testing getVertex function" << endl;
+	if(graph.getVertex(2, &newVert)){
+		
+		cout << "vertex " << newVert.id << " found. vertex ";
+
+		if (newVert.numEdges == 0){
+			cout << "has no edges " << endl;
+
+		}else{
+			cout << newVert.numEdges << " edges!";
+		}
+		
+	} else{
+		cout << "get vertex failed" << endl;
+	}
+
 	return 0;
 }
