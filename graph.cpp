@@ -301,6 +301,19 @@ int Graph::findIndex(int id){
 	return index;
 }
 
+void Graph::bFirst(int id){
+	//created a vector of booleans to mark if nodes have been visited. initalized all to false
+	vector<bool> visted (vertexVector->size(), false);
+
+	//creating a queue to implement breadth first traversal (fifo)
+	queue<int> traversalQueue;
+
+	//mark current node as visited and enqueue it 
+	//visited[]
+
+
+}
+
 /*
 void Graph::prepEdgePair(int vert1, int vert2, int weight, EdgePair** edgeHolder){
 	EdgePair *newEdgePair = new EdgePair;

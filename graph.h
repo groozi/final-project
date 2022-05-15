@@ -8,9 +8,11 @@
 
 #include <vector>
 #include <iostream>
+#include <queue>
 #include "data.h"
 #define MIN_SIZE 2
 
+using std::queue;
 using std::cout;
 using std::endl;
 using std::vector;

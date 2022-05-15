@@ -7,6 +7,46 @@
 #include "main.h"
 
 int main(int argc, char** argv){
+	srand(time(NULL));
+
+	//creating the test data
+	const int testdatasize = BASE + (rand() % OFFSET + 1);
+    int ids[testdatasize];
+    int weights[testdatasize];
+    int testValue;
+
+    for (int i = 0; i < testdatasize; i++){
+    	ids[i] = rand() % MAXID +1;
+    }
+
+    //making known duplicate vertex
+    ids[testdatasize-2] = ids[testdatasize-3];
+    ids[testdatasize-1] = -1;
+
+    for (int i = 0; i < testdatasize; i++){
+    	weights[i] = rand() % OFFSET + 1;
+    }
+
+    //making dulpicate weight for testing
+    weights[testdatasize-2] = weights[testdatasize-3];
+    //making negative weight for testing
+    weights[testdatasize-1] = -1;
+
+    //showing the test data
+    cout << "showing test data (" << testdatasize << " entries)..." << endl;
+    cout << "test vertices: " << endl;
+    for (int i = 0; i < testdatasize; i++) {
+        cout << "vertex: " << ids[i] << endl;
+    }
+    cout << endl;
+
+    cout << "test weights for edges:" << endl;
+    for (int i = 0; i < testdatasize; i++) {
+        cout << "weight: " << weights[i] << endl;
+    }
+    cout << endl;
+
+
 
 	cout << "creating the adjacency list" << endl;
 	Graph graph;
@@ -169,7 +209,7 @@ cout << endl;
 
 	cout << "testing getVertex function" << endl;
 	if(graph.getVertex(2, &newVert)){
-		
+
 		cout << "vertex " << newVert.id << " found. vertex ";
 
 		if (newVert.numEdges == 0){
@@ -182,6 +222,7 @@ cout << endl;
 	} else{
 		cout << "get vertex failed" << endl;
 	}
+	cout << endl;
 
 	return 0;
 }

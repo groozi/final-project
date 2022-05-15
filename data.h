@@ -19,10 +19,9 @@ struct EdgePair {
 };
 
 struct Vertex {
-    int numEdges; //must account for adding edges to vertex
+    int numEdges; 
     EdgePair *head;
     int id;
-
 };
 
 #endif /* DATA_H */
