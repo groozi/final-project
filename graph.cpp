@@ -64,15 +64,23 @@ bool Graph::hasEdge(int vert1, int vert2){
 
 bool Graph::addEdge(int vert1, int vert2, int weight){
 	bool success = false;
+	bool enter = false;
 	int currentEdges = edgeCount;
 
-	//checks if edges between vertices already exist in the graph
-	if (exists(vert1) && exists(vert2)){
+	if(exists(vert1) && exists(vert2)){
+		if(weight > 0){
+			enter = true;
+		}
+	}
+
+	//checks if vertices shared by edge already exist in the graph
+	if (enter){
 
 		int index = findIndex(vert1);
 		EdgePair *current = vertexVector->at(index).head;
 		//EdgePair **edgeHolder;
 
+		//if no edges exist in vert1's adjacency list
 		if (current == NULL){
 			//prepEdgePair(vert1, vert2, weight, *edgeHolder);
 			
@@ -82,9 +90,6 @@ bool Graph::addEdge(int vert1, int vert2, int weight){
 			newEdgePair->weight = weight;
 			newEdgePair->next = NULL;
 			newEdgePair->prev = NULL;
-
-
-
 			vertexVector->at(index).head = newEdgePair;
 			/*
 			edgeHolder->next = NULL;
@@ -105,6 +110,7 @@ bool Graph::addEdge(int vert1, int vert2, int weight){
 				current = current->next;
             }
 
+            //makes sure edge with vertex doesn't already exists and adding to end of adjacency list
             if (current->toVertex != vert2 && current->next == NULL){
             	//prepEdgePair(vert1, vert2, weight, *edgeHolder);
             	
@@ -114,7 +120,6 @@ bool Graph::addEdge(int vert1, int vert2, int weight){
 				newEdgePair->weight = weight;
 				newEdgePair->next = NULL;
 				
-
 				newEdgePair->prev = current;
 				current->next = newEdgePair;
 
@@ -129,7 +134,7 @@ bool Graph::addEdge(int vert1, int vert2, int weight){
 				}
             }
 		}
-		success = true;
+		//success = true;
 	}
 	return success;
 }
@@ -211,12 +216,8 @@ bool Graph::addVertex(int id){
 		if(currentSize < vertexVector->size()){
 			success = true;
 			vertexCount++;
-			
 		}
-
 	}
-
-
 	return success;
 }
 

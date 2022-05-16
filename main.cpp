@@ -13,9 +13,10 @@ int main(int argc, char** argv){
 	const int testdatasize = BASE + (rand() % OFFSET + 1);
     int ids[testdatasize];
     int weights[testdatasize];
-    //int testValue;
+    int testWeight;
     int randomIndex1;
     int randomIndex2;
+    int randomIndex3;
     Vertex newVert;
 
     cout << "generating test data to begin testing" << endl;
@@ -137,8 +138,8 @@ int main(int argc, char** argv){
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
 	//TESTING FUNCTIONS ON FILLED GRAPH
 	cout << "adding test data to perform testing on non-empty graph " << endl;
-	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
-	
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
 	cout << "filling the graph with test vertices.." << endl;
 	for (int i = 0; i < testdatasize; i++){
 		cout << "adding vertex " << ids[i] << " to the graph..." << endl;
@@ -148,12 +149,36 @@ int main(int argc, char** argv){
 		} else{
 			cout << "add failed" << endl;
 		}
+	}
 
+	cout << endl;
+	cout << "filling the graph with edges...." << endl;
+	for (int i = 0; i < testdatasize; i++){
+		randomIndex1 = rand() % testdatasize;
+		randomIndex2 = rand() % testdatasize;
+		testWeight = rand() % testdatasize;
+		cout << "adding edge from vertex " << ids[randomIndex1] << " to vertex " << ids[randomIndex2] <<" with weight " << weights[testWeight] << endl;
+		if(graph.addEdge(ids[randomIndex1], ids[randomIndex2], weights[testWeight])){
+			cout << "edge successfully added" << endl;
+		}else{
+			cout << "add edge failed" << endl;
+		}
+		cout << endl;
+	}
+	cout << endl;
+
+	cout << "attempting to add duplicate...";
+	cout << "adding edge from vertex " << ids[randomIndex1] << " to vertex " << ids[randomIndex2] <<" with weight " << weights[testWeight] << endl;
+
+	if(graph.addEdge(randomIndex1, randomIndex2, testWeight)){
+		cout << "edge successfully added" << endl;
+	}else{
+		cout << "add edge failed" << endl;
 	}
 
 	cout << endl;
 
-		cout << "printing the current graph... " << endl;
+	cout << "printing the current graph... " << endl;
 	graph.printGraph();
 	cout << endl;
 	
