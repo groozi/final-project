@@ -46,11 +46,12 @@ int Graph::getEdgeCount(){
 bool Graph::hasEdge(int vert1, int vert2){
 	bool flag;
 
-	if(!exists(vert1)){
-		flag = false;
-	}else if(exists(vert2)){
+	if(exists(vert1) && exists(vert2)){
 		EdgePair *current = vertexVector->at(findIndex(vert1)).head;
-		if(current != NULL){
+
+		if(current == NULL){
+			flag = false;
+		}else{
 			if(current->toVertex == vert2){
 				flag = true;
 			}else{
@@ -63,15 +64,9 @@ bool Graph::hasEdge(int vert1, int vert2){
 					flag = false;
 				}
 			}
-
-		}else{
-			flag = false;
 		}
-	}else{
-		flag = false;
 	}
 	return flag;
-
 }
 
 bool Graph::addEdge(int vert1, int vert2, int weight){

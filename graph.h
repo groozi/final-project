@@ -34,10 +34,6 @@ public:
     void printGraph(); //done
     void bFirst(int); //breadth first traversal
     void dFirst(int);  //depth first traversal 
-
-
-
-
     
 private:
 
@@ -47,7 +43,7 @@ private:
    bool exists(int);
    int findIndex(int); //done
    //void prepEdgePair(int, int, int, EdgePair**);
-   bool pairExists(int, int);
+
 
 };
 
