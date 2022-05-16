@@ -33,7 +33,7 @@ public:
     bool getVertex(int, Vertex*); //done
     void printGraph(); //done
     void bFirst(int); //breadth first traversal
-    void dFirst(int);  //depth first traversal 
+    void dFirst(int);  //depth first traversal
     
 private:
 

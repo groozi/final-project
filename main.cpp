@@ -165,7 +165,6 @@ int main(int argc, char** argv){
 		}
 		cout << endl;
 	}
-	cout << endl;
 
 	cout << "attempting to add duplicate...";
 	cout << "adding edge from vertex " << ids[randomIndex1] << " to vertex " << ids[randomIndex2] <<" with weight " << weights[testWeight] << endl;
@@ -203,7 +202,9 @@ int main(int argc, char** argv){
 	for(int i = 0; i < LOOP; i++){
 		randomIndex1 = rand() % testdatasize;
 		randomIndex2 = rand() % testdatasize;
+
 		cout << "checking if edge exists between vertex " << ids[randomIndex1] << " and vertex " << ids[randomIndex2] << endl;
+
 		if(graph.hasEdge(ids[randomIndex1], ids[randomIndex2])){
 			cout << "edge exists" << endl;
 		} else{
@@ -212,7 +213,51 @@ int main(int argc, char** argv){
 		cout << endl;
 	}
 	cout << endl;
+	cout << "testing hasEdge with known edge..." << "checking if edge exists between vertex " << ids[randomIndex1] << " and vertex " << ids[randomIndex2] << endl;;
+	cout << " edge from vertex " << ids[randomIndex1] << " to vertex " << ids[randomIndex2] <<" with weight " << weights[testWeight] << endl;
 
+/*
+	randomIndex1 = rand() % testdatasize;
+	cout << "showing adjacency list for vertex " << ids[randomIndex1] << "... " << endl;
+
+	if(graph.getVertex(ids[testdatasize-4]), &newVert){
+		if (newVert.head != NULL){
+			cout << "list: " << newVert.head << " ";
+		} else {
+			cout << "list empty" << endl;
+		}
+		
+	} else{
+		cout << "no adjacent edges" << endl;
+	}
+	cout << endl;
+*/
+
+cout << endl;
+
+	cout << "testing getVertex function... getting vertex " << ids[randomIndex1] << endl;
+	EdgePair pointer;
+
+	if(graph.getVertex(ids[randomIndex1], &newVert)){
+		if (newVert.numEdges == 0){
+			cout << "has no adjacent edges " << endl;
+
+		}else{
+			pointer = *newVert.head;
+			cout << "adjacent edge with vertex " << pointer.toVertex << " of weight " << pointer.weight;
+			/*
+
+			while(pointer.next != NULL){
+				cout << " -> " << "edge with vertex " << pointer.toVertex << "of weight " << pointer.weight;
+				pointer = pointer.next;
+			}
+			*/
+		}
+		
+	} else{
+		cout << "get vertex failed" << endl;
+	}
+	cout << endl;
 
 
 /*
