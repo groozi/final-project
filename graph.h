@@ -20,32 +20,28 @@ using std::vector;
 class Graph{
 
 public:
-    Graph(); //done
+    Graph();
     ~Graph();
-    bool isEmpty(); //done
-    int getVertexCount(); //done
-    int getEdgeCount(); //returns count of edges in entire graph done
-    bool hasEdge(int, int); //done
-    bool addEdge(int, int, int); //done
-    bool removeEdge(int, int); //done
-    bool addVertex(int); //done
-    bool removeVertex(int); //done
-    bool getVertex(int, Vertex*); //done
-    void printGraph(); //done
+    bool isEmpty();
+    int getVertexCount();
+    int getEdgeCount(); //returns count of edges in entire graph
+    bool hasEdge(int, int);
+    bool addEdge(int, int, int);
+    bool removeEdge(int, int);
+    bool addVertex(int);
+    bool removeVertex(int);
+    bool getVertex(int, Vertex*);
+    void printGraph();
     void bFirst(int); //breadth first traversal
     void dFirst(int);  //depth first traversal
     void clearGraph();
     
 private:
-
    vector<Vertex> *vertexVector; 
    int vertexCount;
    int edgeCount;
    bool exists(int);
-   int findIndex(int); //done
-   //void prepEdgePair(int, int, int, EdgePair**);
-
-
+   int findIndex(int);
 };
 
-#endif //STACK_H
+#endif //GRAPH_H

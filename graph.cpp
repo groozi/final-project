@@ -15,13 +15,6 @@ Graph::Graph(){
 Graph::~Graph(){
 	clearGraph();
 	delete(vertexVector);
-
-	/*
-	for (int i = 0; i < rowCount; i++){
-		delete[] bidGraph[i];
-	}
-	delete[] bidGraph;
-	*/
 }
 
 void Graph::clearGraph(){
@@ -34,20 +27,16 @@ bool Graph::isEmpty(){
 	if(vertexVector->size() > 0){
 		flag = false;
 	}
-
 	return flag;
 }
 
 int Graph::getVertexCount(){
-	//vertexCount = vertexVector->size();
 	return vertexVector->size();
-	//return vertexCount;
 }
 
 int Graph::getEdgeCount(){
 	return edgeCount;
 }
-
 
 bool Graph::hasEdge(int vert1, int vert2){
 	bool flag = false;
@@ -76,7 +65,6 @@ bool Graph::hasEdge(int vert1, int vert2){
 			}
 		}
 	}
-
 	return flag;
 }
 
@@ -90,18 +78,13 @@ bool Graph::addEdge(int vert1, int vert2, int weight){
 			enter = true;
 		}
 	}
-
-	//checks if vertices shared by edge already exist in the graph
+	//enter checks if vertices shared by edge already exist in the graph and weight is valid
 	if (enter){
-
 		int index = findIndex(vert1);
 		EdgePair *current = vertexVector->at(index).head;
-		//EdgePair **edgeHolder;
 
 		//if no edges exist in vert1's adjacency list
 		if (current == NULL){
-			//prepEdgePair(vert1, vert2, weight, *edgeHolder);
-			
 			EdgePair *newEdgePair = new EdgePair;
 			newEdgePair->fromVertex = vert1;
 			newEdgePair->toVertex = vert2;
@@ -109,41 +92,26 @@ bool Graph::addEdge(int vert1, int vert2, int weight){
 			newEdgePair->next = NULL;
 			newEdgePair->prev = NULL;
 			vertexVector->at(index).head = newEdgePair;
-			/*
-			edgeHolder->next = NULL;
-		
-			vertexVector->at(findIndex(vert1)).head = *edgeHolder;
-			*/
 			edgeCount++;
 			vertexVector->at(index).numEdges++;
 			
 			if (edgeCount > currentEdges){
 				success = true;
-
 			}
-		} else{		
-
-			//will not move to next if vert2 is in list already and if next points to null
+		}else{		
+			//will not move to next if vert2 is already in list and if next points to null
 			while (current->toVertex != vert2 && current->next){
 				current = current->next;
             }
-
-            //makes sure edge with vertex doesn't already exists and adding to end of adjacency list
-            if (current->toVertex != vert2 && current->next == NULL){
-            	//prepEdgePair(vert1, vert2, weight, *edgeHolder);
-            	
+            //makes sure edge doesn't already exists and are adding to end of adjacency list
+            if (current->toVertex != vert2 && current->next == NULL){            	
             	EdgePair *newEdgePair = new EdgePair;
 				newEdgePair->fromVertex = vert1;
 				newEdgePair->toVertex = vert2;
 				newEdgePair->weight = weight;
 				newEdgePair->next = NULL;
-				
 				newEdgePair->prev = current;
 				current->next = newEdgePair;
-
-            	//&edgeHolder->prev = current;
-            	//current->next = *edgeHolder;
-
 				edgeCount++;
 				vertexVector->at(index).numEdges++;
 
@@ -152,7 +120,6 @@ bool Graph::addEdge(int vert1, int vert2, int weight){
 				}
             }
 		}
-		//success = true;
 	}
 	return success;
 }
@@ -167,7 +134,7 @@ bool Graph::removeEdge(int vert1, int vert2){
 	if (isEmpty()){
 		enter = false;
 	}else{
-		//creating needed variables for function only if we can actually call the function(vertices exist in graph)
+		//only creates needed variables if we can actually call the method(graph is not empty)
 		index = findIndex(vert1);
 		current = vertexVector->at(index).head;
 	}
@@ -175,17 +142,14 @@ bool Graph::removeEdge(int vert1, int vert2){
 	//if there are edges in the linkedlist of the starting vertex
 	if(enter && current != NULL){
 
-		//find where the edge you're deleting is in the linked list. goes through list stopping if you find vert1 or before going off end of list
+		//find edge to deleting in adjacency linked list
 		while(current->toVertex != vert2 && current->next){
 			current = current->next;
 		}
 
-		//cout << "current stopped at edge pair" << current->fromVertex << " to " << current->toVertex << "! " << endl;
-
-		//confirming correct edge to delete was found
 		if(current->fromVertex == vert1 && current->toVertex == vert2){
 
-			//removing edge when it's the only one in the adjacency list
+			//removing edge when only one in list
 			if(current->prev == NULL && current->next == NULL){
 				delete(current);
 				edgeCount--;
@@ -201,7 +165,7 @@ bool Graph::removeEdge(int vert1, int vert2){
 				current->prev->next = NULL;
 				delete(current);
 				edgeCount--;
-			//removing edge from middle of adjacency list
+			//removing edge from middle of list
 			}else if(current->next != NULL){
 				current->prev->next = current->next;
 				current->next->prev = current->prev;
@@ -215,7 +179,6 @@ bool Graph::removeEdge(int vert1, int vert2){
 			}
 		}
 	}
-
 	return success;
 }
 
@@ -229,7 +192,6 @@ bool Graph::addVertex(int id){
 		newVertex->numEdges = 0;
 		newVertex->id = id;
 		vertexVector->push_back(*newVertex);
-		//delete(newVertex);
 
 		if(currentSize < vertexVector->size()){
 			success = true;
@@ -242,10 +204,9 @@ bool Graph::addVertex(int id){
 bool Graph::removeVertex(int id){
 	bool success = false;
 
-	//only performs remove vertex process if vector is not empty and id exists in the vector
+	//only begins remove vertex process if vector is not empty and id exists in the vector
 	if(!isEmpty() && exists(id)){
 		int prevCount = vertexVector->size();
-		//finding vertex in the vector to delete
 		edgeCount = edgeCount - vertexVector->at(findIndex(id)).numEdges;
 		vertexVector->erase(vertexVector->begin() + findIndex(id));
 
@@ -259,47 +220,30 @@ bool Graph::removeVertex(int id){
 
 bool Graph::getVertex(int id, Vertex* fillVert){
 	bool success = false;
-	//cout << "entered method" << endl;
 
 	if(exists(id)){
-
 		int index = findIndex(id);
-		//cout << "id exists in vector" << endl;
-		//cout << "index is " << index << endl;
 
 		if(vertexVector->at(index).id == id){
-			//cout << "entered. current id at index is " << vertexVector->at(index).id << "~ id: " << id << endl;
 			fillVert->id = vertexVector->at(index).id;
-			//cout << fillVert->id << endl;
-			//cout << "fillVert id is " << fillVert->id << endl;
 			fillVert->numEdges = vertexVector->at(index).numEdges;
-			//cout << fillVert->numEdges << endl;
 			fillVert->head = vertexVector->at(index).head;
 			success = true;
 		}
-
-	} else{
-		//cout << "id not in vector" << endl;
+	}else{
 		fillVert->id = -1;
 		fillVert->head = NULL;
 		fillVert->numEdges = -1;
 	}
-	//EdgePair *current = vertexVector->at(findIndex(id)).head;
-
-
 	return success;
 }
 
-
 void Graph::printGraph(){
-
 	if (vertexVector->size() > 0){
-
 		cout << "current vertex count: " << vertexCount << " current edge count: " << edgeCount << endl;
 
 		for (int i = 0; i < vertexVector->size(); i++){
 			cout << "vertex " << vertexVector->at(i).id << ": ";
-
 			EdgePair *current = vertexVector->at(i).head;
 
 			if (current == NULL){
@@ -317,10 +261,8 @@ void Graph::printGraph(){
 				}
 			}
 		}
-
 	} else{
 		cout << "graph is empty" << endl;
-		
 	}
 	return;
 }
@@ -328,7 +270,7 @@ void Graph::printGraph(){
 bool Graph::exists(int id){
 	bool vertFound = false;
 
-	//only check through vector for vertex if id number is valid
+	//only check for vertex if id is valid (positive int)
 	if(id > 0){
 		for (int i = 0; i < vertexVector->size(); i++){
 			if (vertexVector->at(i).id == id){
@@ -341,7 +283,6 @@ bool Graph::exists(int id){
 
 int Graph::findIndex(int id){
 	int index = -1;
-
 	if(!isEmpty()){
 		for(int i = 0; i < vertexVector->size(); i++){
 
@@ -350,7 +291,6 @@ int Graph::findIndex(int id){
 			}
 		}
 	}
-
 	return index;
 }
 
@@ -364,17 +304,3 @@ void Graph::bFirst(int id){
 	//mark current node as visited and enqueue it 
 	//visited[]
 }
-
-
-
-/*
-void Graph::prepEdgePair(int vert1, int vert2, int weight, EdgePair** edgeHolder){
-	EdgePair *newEdgePair = new EdgePair;
-	newEdgePair->fromVertex = vert1;
-	newEdgePair->toVertex = vert2;
-	newEdgePair->weight = weight;
-	newEdgePair->next = NULL;
-	*edgeHolder = newEdgePair;
-}
-*/
-

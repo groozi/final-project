@@ -7,9 +7,9 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include <iostream>     /* cout, endl */
-//#include <stdlib.h>     /* srand, rand */
-//#include <time.h>       /* time */
+#include <iostream>
+#include <stdlib.h>   
+#include <time.h>       
 #include <vector>
 #include "data.h"
 #include "graph.h"
@@ -25,6 +25,5 @@
 using std::cout;
 using std::endl;
 using std::vector;
-
 
 #endif /* MAIN_H */

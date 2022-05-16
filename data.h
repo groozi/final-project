@@ -7,9 +7,6 @@
 #ifndef DATA_H
 #define DATA_H
 
-#include "string"
-using std::string;
-
 struct EdgePair {
     int fromVertex;
     int toVertex;
@@ -23,5 +20,4 @@ struct Vertex {
     EdgePair *head;
     int id;
 };
-
 #endif /* DATA_H */
