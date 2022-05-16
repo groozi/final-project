@@ -135,13 +135,21 @@ bool Graph::addEdge(int vert1, int vert2, int weight){
 
 bool Graph::removeEdge(int vert1, int vert2){
 	bool success = false;
+	bool enter = true;
 	int currentSize = edgeCount;
-	int index = findIndex(vert1);
+	int index;
+	EdgePair *current = NULL;
 
-	EdgePair *current = vertexVector->at(index).head;
+	if (isEmpty()){
+		enter = false;
+	}else{
+		//creating needed variables for function only if we can actually call the function(vertices exist in graph)
+		index = findIndex(vert1);
+		current = vertexVector->at(index).head;
+	}
 
 	//if there are edges in the linkedlist of the starting vertex
-	if(current != NULL){
+	if(enter && current != NULL){
 
 		//find where the edge you're deleting is in the linked list. goes through list stopping if you find vert1 or before going off end of list
 		while(current->toVertex != vert2 && current->next){
@@ -292,12 +300,17 @@ bool Graph::exists(int id){
 int Graph::findIndex(int id){
 	int index;
 
-	for(int i = 0; i < vertexVector->size(); i++){
+	if(!isEmpty()){
+		for(int i = 0; i < vertexVector->size(); i++){
 
-		if (vertexVector->at(i).id == id){
-			index = i;
+			if (vertexVector->at(i).id == id){
+				index = i;
+			}
 		}
+	} else{
+		index = -1;
 	}
+
 	return index;
 }
 

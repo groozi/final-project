@@ -14,15 +14,22 @@ int main(int argc, char** argv){
     int ids[testdatasize];
     int weights[testdatasize];
     int testValue;
+    int randomIndex1;
+    int randomIndex2;
 
+    cout << "generating test data to begin testing" << endl;
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
+    //generating random vertices
     for (int i = 0; i < testdatasize; i++){
     	ids[i] = rand() % MAXID +1;
     }
 
-    //making known duplicate vertex
+    //making known duplicate vertices
     ids[testdatasize-2] = ids[testdatasize-3];
     ids[testdatasize-1] = -1;
 
+    //generating random weights
     for (int i = 0; i < testdatasize; i++){
     	weights[i] = rand() % OFFSET + 1;
     }
@@ -32,8 +39,10 @@ int main(int argc, char** argv){
     //making negative weight for testing
     weights[testdatasize-1] = -1;
 
-    //showing the test data
-    cout << "showing test data (" << testdatasize << " entries)..." << endl;
+    cout << "test data created. showing test data to begin testing....." << endl;
+
+    //showing the test data. vertices then weights
+    cout << testdatasize << " entries of test data..." << endl;
     cout << "test vertices: " << endl;
     for (int i = 0; i < testdatasize; i++) {
         cout << "vertex: " << ids[i] << endl;
@@ -46,13 +55,73 @@ int main(int argc, char** argv){
     }
     cout << endl;
 
-
-
-	cout << "creating the adjacency list" << endl;
+    //creating the graph
+	cout << "creating the graph..." << endl;
 	Graph graph;
-	cout << "created" << endl;
+	cout << "graph created" << endl;
+	cout << endl;
 	
+
+	//TESTING FUNCTIONS ON EMPTY GRAPH
+	cout << "testing functions on empty graph" << endl;
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
+	cout << "testing isEmpty... " << endl;
+	if(graph.isEmpty()){
+		cout << "graph is empty" << endl;
+	}else{
+		cout << "graph is not empty" << endl;
+	}
+	cout << endl;
+
+	cout << "testing getVertexCount... " << endl;
+	cout << "currently " << graph.getVertexCount() << " vertices in the graph" << endl << endl;
+
+	cout << "testing getEdgeCount... " << endl;
+	cout << "currently " << graph.getEdgeCount() << " edges in the graph" << endl << endl;
+
+	cout << "testing hasEdge... " << endl;
+	randomIndex1 = rand() % testdatasize;
+	randomIndex2 = rand() % testdatasize;
+	cout << "checking if edge exists between vertex " << ids[randomIndex1] << " and vertex " << ids[randomIndex2] << endl;
+	if(graph.hasEdge(ids[randomIndex1], ids[randomIndex2])){
+		cout << "edge exists" << endl;
+	} else{
+		cout << "edge does not exist" << endl;
+	}
+	cout << endl;
+
+	cout << "testing removeEdge... " << endl;
+	randomIndex1 = rand() % testdatasize;
+	randomIndex2 = rand() % testdatasize;
+	cout << "removing edge between vertex " << ids[randomIndex1] << " and vertex " << ids[randomIndex2] << endl;
+	if(graph.removeEdge(ids[randomIndex1], ids[randomIndex2])){
+		cout << "edge removed" << endl;
+	} else{
+		cout << "edge not removed" << endl;
+	}
+	cout << endl;
+
+
+
+
+/*
+
+	if(graph.isEmpty()){
+		cout << "graph is empty" << endl;
+	}else{
+		cout << "graph is not empty" << endl;
+	}
+	cout << endl;
 	
+*/
+
+
+
+
+
+/*
+
 	if(graph.addVertex(1)){
 		cout << "vertex added" << endl;
 	} else{
@@ -223,6 +292,8 @@ cout << endl;
 		cout << "get vertex failed" << endl;
 	}
 	cout << endl;
+
+	*/
 
 	return 0;
 }
