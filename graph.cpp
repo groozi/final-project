@@ -296,11 +296,30 @@ int Graph::findIndex(int id){
 
 void Graph::bFirst(int id){
 	//created a vector of booleans to mark if nodes have been visited. initalized all to false
-	vector<bool> visted (vertexVector->size(), false);
+	vector<bool> visited (vertexVector->size(), false);
 
 	//creating a queue to implement breadth first traversal (fifo)
 	queue<int> traversalQueue;
 
 	//mark current node as visited and enqueue it 
-	//visited[]
+	visited[findIndex(id)] = true;
+	cout << vertexVector->at(findIndex(id)).id << endl;
+	traversalQueue.push(vertexVector->at(findIndex(id)).id);
+	int *n;
+
+	while(!traversalQueue.empty()){
+		n = traversalQueue.front();
+		traversalQueue.pop();
+
+		for(int i = 0; i < vertexVector->at(findIndex(id)).numEdges; i++){
+			if(!n->vertexVector->at(findIndex(id).id->visited)){
+				traversalQueue.push(vertexVector->at(i).id);
+				visited[i] = true;
+			}
+
+
+		}
+	}
+
+
 }
