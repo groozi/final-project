@@ -62,15 +62,6 @@ int main(int argc, char** argv){
 	cout << "graph created" << endl;
 	cout << endl;
 
-
-	if(graph.addVertex(3)){
-		cout << "vertex 3 added" << endl;
-	} else{
-		cout << "add vertex failed" << endl;
-	}
-
-	cout << "getting vertex count. current count is " << graph.getVertexCount() << endl;
-
 	//TESTING FUNCTIONS ON EMPTY GRAPH
 	cout << "testing functions on empty graph" << endl;
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
@@ -88,7 +79,6 @@ int main(int argc, char** argv){
 
 	cout << "testing getEdgeCount... " << endl;
 	cout << "currently " << graph.getEdgeCount() << " edges in the graph" << endl << endl;
-	cout << "getting vertex count. current count is " << graph.getVertexCount() << endl;
 
 	cout << "testing hasEdge... " << endl;
 	randomIndex1 = rand() % testdatasize;
@@ -100,9 +90,7 @@ int main(int argc, char** argv){
 		cout << "edge does not exist" << endl;
 	}
 	cout << endl;
-	cout << "getting vertex count. current count is " << graph.getVertexCount() << endl;
 
-/*
 	cout << "testing removeEdge... " << endl;
 	randomIndex1 = rand() % testdatasize;
 	randomIndex2 = rand() % testdatasize;
@@ -113,9 +101,8 @@ int main(int argc, char** argv){
 		cout << "edge not removed" << endl;
 	}
 	cout << endl;
-	*/
 
-	cout << "getting vertex count. current count is " << graph.getVertexCount() << endl;
+	cout << endl;
 	cout << "testing removeVertex... " << endl;
 	randomIndex1 = rand() % testdatasize;
 	cout << "removing vertex " << ids[randomIndex1] << "..." << endl;
@@ -127,9 +114,7 @@ int main(int argc, char** argv){
 			cout << "vertex not removed" << endl;
 			cout << "getting vertex count. current count is " << graph.getVertexCount() << endl;
 		}
-		cout << endl;
-		cout << "~~~getting vertex count. current count is " << graph.getVertexCount() << endl;
-	
+		cout << endl;	
 	
 	cout << "testing getVertex... " << endl;
 	randomIndex1 = rand() % testdatasize;
@@ -145,13 +130,9 @@ int main(int argc, char** argv){
 	}
 	cout << endl;
 
-	cout << "getting vertex count. current count is " << graph.getVertexCount() << endl;
-
 	cout << "printing the current graph... " << endl;
 	graph.printGraph();
 	cout << endl;
-
-/*
 
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
 	//TESTING FUNCTIONS ON FILLED GRAPH
@@ -169,16 +150,14 @@ int main(int argc, char** argv){
 		}
 
 	}
-	*/
+
+	cout << endl;
+
+		cout << "printing the current graph... " << endl;
+	graph.printGraph();
+	cout << endl;
 	
-
-	cout << "~~~~~~~" << endl;
-
-	if(graph.addVertex(3)){
-		cout << "vertex 3 added" << endl;
-	} else{
-		cout << "add vertex failed" << endl;
-	}
+	
 
 
 

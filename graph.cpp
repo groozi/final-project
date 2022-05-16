@@ -200,7 +200,7 @@ bool Graph::addVertex(int id){
 	bool success = false;
 	int currentSize = vertexVector->size();
 
-	if(!exists(id)){
+	if(id > 0 && !exists(id)){
 		Vertex *newVertex = new Vertex;
 		newVertex->head = NULL;
 		newVertex->numEdges = 0;
@@ -223,26 +223,17 @@ bool Graph::addVertex(int id){
 bool Graph::removeVertex(int id){
 	bool success = false;
 
+	//only performs remove vertex process if vector is not empty and id exists in the vector
 	if(!isEmpty() && exists(id)){
 		int prevCount = vertexVector->size();
-		cout << "prev count is " << prevCount << endl;
-
+		//finding vertex in the vector to delete
 		vertexVector->erase(vertexVector->begin() + findIndex(id));
 
 		if (vertexVector->size() < prevCount){
 			success = true;
 			vertexCount--;
-			cout << "current count is " << vertexCount << endl;
-			cout << "calling vertextVector size function... size: " << vertexVector->size() << endl;
-		
+		}
 	}
-
-
-
-	}
-
-
-
 	return success;
 }
 
