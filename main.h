@@ -18,7 +18,7 @@
 #define MAXID 100
 #define BASE 10
 #define OFFSET 20
-#define CHOICES 6
+#define CHOICES 11
 #define RANDOM_MULTIPLIER 12
 #define LOOP 6
 
