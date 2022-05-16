@@ -32,7 +32,6 @@ public:
     bool removeVertex(int); //done
     bool getVertex(int, Vertex*); //done
     void printGraph(); //done
-    bool exists(int); //done
     void bFirst(int); //breadth first traversal
     void dFirst(int);  //depth first traversal 
 
@@ -45,7 +44,7 @@ private:
    vector<Vertex> *vertexVector; 
    int vertexCount;
    int edgeCount;
-   //bool exists(int id);
+   bool exists(int id);
    int findIndex(int id); //done
    //void prepEdgePair(int, int, int, EdgePair**);
 

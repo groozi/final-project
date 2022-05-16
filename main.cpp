@@ -13,9 +13,10 @@ int main(int argc, char** argv){
 	const int testdatasize = BASE + (rand() % OFFSET + 1);
     int ids[testdatasize];
     int weights[testdatasize];
-    int testValue;
+    //int testValue;
     int randomIndex1;
     int randomIndex2;
+    Vertex newVert;
 
     cout << "generating test data to begin testing" << endl;
     cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
@@ -60,7 +61,15 @@ int main(int argc, char** argv){
 	Graph graph;
 	cout << "graph created" << endl;
 	cout << endl;
-	
+
+
+	if(graph.addVertex(3)){
+		cout << "vertex 3 added" << endl;
+	} else{
+		cout << "add vertex failed" << endl;
+	}
+
+	cout << "getting vertex count. current count is " << graph.getVertexCount() << endl;
 
 	//TESTING FUNCTIONS ON EMPTY GRAPH
 	cout << "testing functions on empty graph" << endl;
@@ -79,6 +88,7 @@ int main(int argc, char** argv){
 
 	cout << "testing getEdgeCount... " << endl;
 	cout << "currently " << graph.getEdgeCount() << " edges in the graph" << endl << endl;
+	cout << "getting vertex count. current count is " << graph.getVertexCount() << endl;
 
 	cout << "testing hasEdge... " << endl;
 	randomIndex1 = rand() % testdatasize;
@@ -90,7 +100,9 @@ int main(int argc, char** argv){
 		cout << "edge does not exist" << endl;
 	}
 	cout << endl;
+	cout << "getting vertex count. current count is " << graph.getVertexCount() << endl;
 
+/*
 	cout << "testing removeEdge... " << endl;
 	randomIndex1 = rand() % testdatasize;
 	randomIndex2 = rand() % testdatasize;
@@ -101,6 +113,74 @@ int main(int argc, char** argv){
 		cout << "edge not removed" << endl;
 	}
 	cout << endl;
+	*/
+
+	cout << "getting vertex count. current count is " << graph.getVertexCount() << endl;
+	cout << "testing removeVertex... " << endl;
+	randomIndex1 = rand() % testdatasize;
+	cout << "removing vertex " << ids[randomIndex1] << "..." << endl;
+
+		if(graph.removeVertex(ids[randomIndex1])){
+			cout << "vertex removed" << endl;
+			cout << "getting vertex count. current count is " << graph.getVertexCount() << endl;
+		} else{
+			cout << "vertex not removed" << endl;
+			cout << "getting vertex count. current count is " << graph.getVertexCount() << endl;
+		}
+		cout << endl;
+		cout << "~~~getting vertex count. current count is " << graph.getVertexCount() << endl;
+	
+	
+	cout << "testing getVertex... " << endl;
+	randomIndex1 = rand() % testdatasize;
+	cout << "getting vertex " << ids[randomIndex1] << "..." << endl;
+	if(graph.getVertex(ids[randomIndex1], &newVert)){
+		cout << "vertex found" << endl;
+
+		if (newVert.numEdges != 0){
+			cout << ". vertex has " << newVert.numEdges << " adjacent edges";
+		}
+	} else{
+		cout << "vertex not found" << endl;
+	}
+	cout << endl;
+
+	cout << "getting vertex count. current count is " << graph.getVertexCount() << endl;
+
+	cout << "printing the current graph... " << endl;
+	graph.printGraph();
+	cout << endl;
+
+/*
+
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
+	//TESTING FUNCTIONS ON FILLED GRAPH
+	cout << "adding test data to perform testing on non-empty graph " << endl;
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
+	
+	cout << "filling the graph with test vertices.." << endl;
+	for (int i = 0; i < testdatasize; i++){
+		cout << "adding vertex " << ids[i] << " to the graph..." << endl;
+
+		if(graph.addVertex(ids[i])){
+			cout << "add successful" << endl;
+		} else{
+			cout << "add failed" << endl;
+		}
+
+	}
+	*/
+	
+
+	cout << "~~~~~~~" << endl;
+
+	if(graph.addVertex(3)){
+		cout << "vertex 3 added" << endl;
+	} else{
+		cout << "add vertex failed" << endl;
+	}
+
+
 
 
 

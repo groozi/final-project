@@ -23,10 +23,10 @@ Graph::~Graph(){
 }
 
 bool Graph::isEmpty(){
-	bool flag = false;
+	bool flag = true;
 
-	if(getVertexCount() < 1){
-		flag = true;
+	if(vertexVector->size() > 0){
+		flag = false;
 	}
 
 	return flag;
@@ -35,6 +35,7 @@ bool Graph::isEmpty(){
 int Graph::getVertexCount(){
 	//vertexCount = vertexVector->size();
 	return vertexVector->size();
+	//return vertexCount;
 }
 
 int Graph::getEdgeCount(){
@@ -199,53 +200,73 @@ bool Graph::addVertex(int id){
 	bool success = false;
 	int currentSize = vertexVector->size();
 
-	Vertex *newVertex = new Vertex;
-	newVertex->head = NULL;
-	newVertex->numEdges = 0;
-	newVertex->id = id;
-	vertexVector->push_back(*newVertex);
+	if(!exists(id)){
+		Vertex *newVertex = new Vertex;
+		newVertex->head = NULL;
+		newVertex->numEdges = 0;
+		newVertex->id = id;
+		vertexVector->push_back(*newVertex);
+		//delete(newVertex);
 
-	if(vertexVector->size() > currentSize){
-		success = true;
-		vertexCount++;
+		if(currentSize < vertexVector->size()){
+			success = true;
+			vertexCount++;
+			
+		}
+
 	}
+
+
 	return success;
 }
 
 bool Graph::removeVertex(int id){
 	bool success = false;
-	int prevCount = getVertexCount();
 
-	vertexVector->pop_back();
+	if(!isEmpty() && exists(id)){
+		int prevCount = vertexVector->size();
+		cout << "prev count is " << prevCount << endl;
 
-	if (prevCount < getVertexCount()){
-		success = true;
+		vertexVector->erase(vertexVector->begin() + findIndex(id));
+
+		if (vertexVector->size() < prevCount){
+			success = true;
+			vertexCount--;
+			cout << "current count is " << vertexCount << endl;
+			cout << "calling vertextVector size function... size: " << vertexVector->size() << endl;
+		
 	}
+
+
+
+	}
+
+
 
 	return success;
 }
 
 bool Graph::getVertex(int id, Vertex* fillVert){
 	bool success = false;
-	cout << "entered method" << endl;
+	//cout << "entered method" << endl;
 
-	if(exists(id)){
+	if(!isEmpty() && exists(id)){
 
 		int index = findIndex(id);
-		cout << "id exists in vector" << endl;
-		cout << "index is " << index << endl;
+		//cout << "id exists in vector" << endl;
+		//cout << "index is " << index << endl;
 
 		if(vertexVector->at(index).id == id){
-			cout << "entered. current id at index is " << vertexVector->at(index).id << "~ id: " << id << endl;
+			//cout << "entered. current id at index is " << vertexVector->at(index).id << "~ id: " << id << endl;
 			fillVert->id = vertexVector->at(index).id;
-			cout << "fillVert id is " << fillVert->id << endl;
+			//cout << "fillVert id is " << fillVert->id << endl;
 			fillVert->numEdges = vertexVector->at(index).numEdges;
 			fillVert->head = vertexVector->at(index).head;
 			success = true;
 		}
 
 	} else{
-		cout << "id not in vector" << endl;
+		//cout << "id not in vector" << endl;
 		fillVert->id = -1;
 		fillVert->head = NULL;
 		fillVert->numEdges = 0;
@@ -257,30 +278,37 @@ bool Graph::getVertex(int id, Vertex* fillVert){
 }
 
 void Graph::printGraph(){
-	cout << "current edge count " << edgeCount << endl;
-	
-	for (int i = 0; i < vertexVector->size(); i++){
-		cout << "vertex " << vertexVector->at(i).id << ": ";
 
-		EdgePair *current = vertexVector->at(i).head;
+	if (vertexVector->size() > 0){
 
-		if (current == NULL){
-			cout << "no edges from this vertex" << endl;
-		} else{
-			while (current){
-				cout << "edge with vertex " << current->toVertex << " (weight: " << current->weight << ")";
+		cout << "current vertex count: " << vertexCount << " current edge count: " << edgeCount << endl;
 
-				if (current->next != NULL){
-                    cout << " -> "; 
-                } else{
-                    cout << endl;
-                }
-				current = current->next;
+		for (int i = 0; i < vertexVector->size(); i++){
+			cout << "vertex " << vertexVector->at(i).id << ": ";
+
+			EdgePair *current = vertexVector->at(i).head;
+
+			if (current == NULL){
+				cout << "no edges from this vertex" << endl;
+			} else{
+				while (current){
+					cout << "edge with vertex " << current->toVertex << " (weight: " << current->weight << ")";
+
+					if (current->next != NULL){
+                    	cout << " -> "; 
+                	} else{
+                    	cout << endl;
+                	}
+					current = current->next;
+				}
 			}
 		}
 
+	} else{
+		cout << "graph is empty" << endl;
+		
 	}
-		return;
+	return;
 }
 	
 bool Graph::exists(int id){
@@ -298,7 +326,7 @@ bool Graph::exists(int id){
 }
 
 int Graph::findIndex(int id){
-	int index;
+	int index = -1;
 
 	if(!isEmpty()){
 		for(int i = 0; i < vertexVector->size(); i++){
@@ -307,8 +335,6 @@ int Graph::findIndex(int id){
 				index = i;
 			}
 		}
-	} else{
-		index = -1;
 	}
 
 	return index;
