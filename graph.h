@@ -32,8 +32,6 @@ public:
     bool removeVertex(int);
     bool getVertex(int, Vertex*);
     void printGraph();
-    void bFirst(int); //breadth first traversal
-    void dFirst(int);  //depth first traversal
     void clearGraph();
     
 private:

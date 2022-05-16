@@ -427,39 +427,5 @@ int main(int argc, char** argv){
 		}
 		cout << endl;
 		cout << "testing complete" << endl;
-
-
-			cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-	cout << "filling the graph with test vertices..." << endl << endl;
-	for (int i = 0; i < testdatasize; i++){
-		cout << "adding vertex " << ids[i] << " to the graph..." << endl;
-
-		if(graph.addVertex(ids[i])){
-			cout << "add successful" << endl;
-		}else{
-			cout << "add failed" << endl;
-		}
-		cout << endl;
-	}
-    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-	cout << "filling the graph with edges...." << endl;
-	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-	for (int i = 0; i < testdatasize; i++){
-		randomIndex1 = rand() % testdatasize;
-		randomIndex2 = rand() % testdatasize;
-		testWeight = rand() % testdatasize;
-		cout << "adding edge from vertex " << ids[randomIndex1] << " to vertex " << ids[randomIndex2] <<" with weight " << weights[testWeight] << endl;
-		if(graph.addEdge(ids[randomIndex1], ids[randomIndex2], weights[testWeight])){
-			cout << "edge successfully added" << endl;
-		}else{
-			cout << "add edge failed" << endl;
-		}
-		cout << endl;
-	}
-
-	cout << "printing the current graph... " << endl;
-	graph.printGraph();
-	graph.bFirst(ids[testdatasize-4]);
-
 	return 0;
 }
