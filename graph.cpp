@@ -42,24 +42,36 @@ int Graph::getEdgeCount(){
 	return edgeCount;
 }
 
+
 bool Graph::hasEdge(int vert1, int vert2){
-	bool flag = false;
+	bool flag;
 
-	if (exists(vert1) && exists(vert2)){
-
+	if(!exists(vert1)){
+		flag = false;
+	}else if(exists(vert2)){
 		EdgePair *current = vertexVector->at(findIndex(vert1)).head;
+		if(current != NULL){
+			if(current->toVertex == vert2){
+				flag = true;
+			}else{
+				while(current->toVertex != vert2 && current->next){
+					current = current->next;
+				}
+				if(current->toVertex == vert2){
+					flag = true;
+				}else{ 
+					flag = false;
+				}
+			}
 
-		while(current->toVertex != vert2 && current->next){
-			current = current->next;
+		}else{
+			flag = false;
 		}
-
-		if(current->fromVertex == vert1 && current->toVertex == vert2){
-			flag = true;
-		}
-
+	}else{
+		flag = false;
 	}
-
 	return flag;
+
 }
 
 bool Graph::addEdge(int vert1, int vert2, int weight){

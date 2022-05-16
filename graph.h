@@ -44,9 +44,10 @@ private:
    vector<Vertex> *vertexVector; 
    int vertexCount;
    int edgeCount;
-   bool exists(int id);
-   int findIndex(int id); //done
+   bool exists(int);
+   int findIndex(int); //done
    //void prepEdgePair(int, int, int, EdgePair**);
+   bool pairExists(int, int);
 
 };
 

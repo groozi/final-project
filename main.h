@@ -20,7 +20,7 @@
 #define OFFSET 20
 #define CHOICES 6
 #define RANDOM_MULTIPLIER 12
-#define LOOP 3
+#define LOOP 6
 
 using std::cout;
 using std::endl;

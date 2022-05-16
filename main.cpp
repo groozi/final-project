@@ -175,8 +175,105 @@ int main(int argc, char** argv){
 	}else{
 		cout << "add edge failed" << endl;
 	}
+	cout << endl;
+
+		cout << "printing the current graph... " << endl;
+	graph.printGraph();
+	cout << endl;
+
+		//TESTING FUNCTIONS ON EMPTY GRAPH
+	cout << "testing functions on filled graph" << endl;
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
+	cout << "testing isEmpty... " << endl;
+	if(graph.isEmpty()){
+		cout << "graph is empty" << endl;
+	}else{
+		cout << "graph is not empty" << endl;
+	}
+	cout << endl;
+
+	cout << "testing getVertexCount... " << endl;
+	cout << "currently " << graph.getVertexCount() << " vertices in the graph" << endl << endl;
+
+	cout << "testing getEdgeCount... " << endl;
+	cout << "currently " << graph.getEdgeCount() << " edges in the graph" << endl << endl;
+
+	cout << "testing hasEdge... " << endl;
+	for(int i = 0; i < LOOP; i++){
+		randomIndex1 = rand() % testdatasize;
+		randomIndex2 = rand() % testdatasize;
+		cout << "checking if edge exists between vertex " << ids[randomIndex1] << " and vertex " << ids[randomIndex2] << endl;
+		if(graph.hasEdge(ids[randomIndex1], ids[randomIndex2])){
+			cout << "edge exists" << endl;
+		} else{
+			cout << "edge does not exist" << endl;
+		}
+		cout << endl;
+	}
+	cout << endl;
+
+
+
+/*
+
+	randomIndex1 = rand() % testdatasize;
+	randomIndex2 = rand() % testdatasize;
+	cout << "checking if edge exists between vertex " << ids[randomIndex1] << " and vertex " << ids[randomIndex2] << endl;
+	if(graph.hasEdge(ids[randomIndex1], ids[randomIndex2])){
+		cout << "edge exists" << endl;
+	} else{
+		cout << "edge does not exist" << endl;
+	}
+	cout << endl;
+
+	cout << "testing removeEdge... " << endl;
+	randomIndex1 = rand() % testdatasize;
+	randomIndex2 = rand() % testdatasize;
+	cout << "removing edge between vertex " << ids[randomIndex1] << " and vertex " << ids[randomIndex2] << endl;
+	if(graph.removeEdge(ids[randomIndex1], ids[randomIndex2])){
+		cout << "edge removed" << endl;
+	} else{
+		cout << "edge not removed" << endl;
+	}
+	cout << endl;
 
 	cout << endl;
+	cout << "testing removeVertex... " << endl;
+	randomIndex1 = rand() % testdatasize;
+	cout << "removing vertex " << ids[randomIndex1] << "..." << endl;
+
+		if(graph.removeVertex(ids[randomIndex1])){
+			cout << "vertex removed" << endl;
+			cout << "getting vertex count. current count is " << graph.getVertexCount() << endl;
+		} else{
+			cout << "vertex not removed" << endl;
+			cout << "getting vertex count. current count is " << graph.getVertexCount() << endl;
+		}
+		cout << endl;	
+	
+	cout << "testing getVertex... " << endl;
+	randomIndex1 = rand() % testdatasize;
+	cout << "getting vertex " << ids[randomIndex1] << "..." << endl;
+	if(graph.getVertex(ids[randomIndex1], &newVert)){
+		cout << "vertex found" << endl;
+
+		if (newVert.numEdges != 0){
+			cout << ". vertex has " << newVert.numEdges << " adjacent edges";
+		}
+	} else{
+		cout << "vertex not found" << endl;
+	}
+	cout << endl;
+
+	cout << "printing the current graph... " << endl;
+	graph.printGraph();
+	cout << endl;
+
+*/
+
+
+
 
 	cout << "printing the current graph... " << endl;
 	graph.printGraph();
