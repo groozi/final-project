@@ -13,6 +13,8 @@ Graph::Graph(){
 }
 
 Graph::~Graph(){
+	clearGraph();
+	delete(vertexVector);
 
 	/*
 	for (int i = 0; i < rowCount; i++){
@@ -20,6 +22,10 @@ Graph::~Graph(){
 	}
 	delete[] bidGraph;
 	*/
+}
+
+void Graph::clearGraph(){
+	vertexVector->clear();
 }
 
 bool Graph::isEmpty(){
@@ -240,6 +246,7 @@ bool Graph::removeVertex(int id){
 	if(!isEmpty() && exists(id)){
 		int prevCount = vertexVector->size();
 		//finding vertex in the vector to delete
+		edgeCount = edgeCount - vertexVector->at(findIndex(id)).numEdges;
 		vertexVector->erase(vertexVector->begin() + findIndex(id));
 
 		if (vertexVector->size() < prevCount){

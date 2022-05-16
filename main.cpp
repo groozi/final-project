@@ -222,13 +222,7 @@ int main(int argc, char** argv){
 		cout << "edge does not exist" << endl;
 	}
 	cout << endl;
-
-
 	//cout << " edge from vertex " << ids[randomIndex1] << " to vertex " << ids[randomIndex2] <<" with weight " << weights[testWeight] << endl;
-
-	cout << endl;
-
-
 	cout << "testing getVertex function for known vertex... getting vertex " << ids[randomIndex1] << endl;
 	EdgePair pointer;
 
@@ -371,6 +365,33 @@ int main(int argc, char** argv){
 	cout << "printing the current graph... " << endl;
 	graph.printGraph();
 	cout << endl;
+	
+	cout << "testing removeVertex... ";
+
+	for(int i = 0; i < testdatasize; i++){
+		randomIndex1 = rand() % testdatasize;
+		cout << "removing vertex " << ids[randomIndex1] << "..." << endl;
+
+		if(graph.removeVertex(ids[randomIndex1])){
+			cout << "vertex removed" << endl;
+		} else{
+			cout << "vertex not removed" << endl;
+		}
+		cout << endl;
+	}
+
+	cout << "printing the current graph... " << endl;
+	graph.printGraph();
+	cout << endl;
+
+	//clearing the graph
+	cout << "clearing the graph" << endl;
+	graph.clearGraph();
+	cout << "printing the current graph... " << endl;
+	graph.printGraph();
+	cout << endl;
+
+
 	
 	
 
