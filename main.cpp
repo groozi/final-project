@@ -235,7 +235,8 @@ int main(int argc, char** argv){
 
 cout << endl;
 
-	cout << "testing getVertex function... getting vertex " << ids[randomIndex1] << endl;
+
+	cout << "testing getVertex function for known vertex... getting vertex " << ids[randomIndex1] << endl;
 	EdgePair pointer;
 
 	if(graph.getVertex(ids[randomIndex1], &newVert)){
@@ -244,7 +245,60 @@ cout << endl;
 
 		}else{
 			pointer = *newVert.head;
+			cout << "vertex has " << newVert.numEdges << " adjacent edges " << endl;
+
+		}
+		
+	} else{
+		cout << "get vertex failed" << endl;
+	}
+	cout << endl;
+
+	for (int i = 0; i < LOOP; i++){
+		randomIndex1 = rand() % testdatasize;
+		cout << "testing getVertex function... getting vertex " << ids[randomIndex1] << endl;
+
+	if(graph.getVertex(ids[randomIndex1], &newVert)){
+		if (newVert.numEdges == 0){
+			cout << "has no adjacent edges " << endl;
+
+		}else{
+			pointer = *newVert.head;
+			cout << "vertex has " << newVert.numEdges << " adjacent edges " << endl;
+
+		}
+		
+	} else{
+		cout << "get vertex failed" << endl;
+	}
+	cout << endl;
+
+
+
+
+
+		}
+
+
+
+
+
+	cout << "testing getVertex function... getting vertex " << ids[randomIndex1] << endl;
+
+	if(graph.getVertex(ids[randomIndex1], &newVert)){
+		if (newVert.numEdges == 0){
+			cout << "no adjacent edges " << endl;
+
+		}else{
+			pointer = *newVert.head;
+			cout << "vertex has " << newVert.numEdges << " adjacent edges " << endl;
+
+			/*
+			cout << "adjacent edge with vertex " << pointer.toVertex << " of weight " << pointer.weight << endl;
+
+			pointer = pointer.next;
 			cout << "adjacent edge with vertex " << pointer.toVertex << " of weight " << pointer.weight;
+			*/
 			/*
 
 			while(pointer.next != NULL){
