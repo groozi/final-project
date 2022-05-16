@@ -263,10 +263,10 @@ bool Graph::getVertex(int id, Vertex* fillVert){
 		if(vertexVector->at(index).id == id){
 			//cout << "entered. current id at index is " << vertexVector->at(index).id << "~ id: " << id << endl;
 			fillVert->id = vertexVector->at(index).id;
-			cout << fillVert->id << endl;
+			//cout << fillVert->id << endl;
 			//cout << "fillVert id is " << fillVert->id << endl;
 			fillVert->numEdges = vertexVector->at(index).numEdges;
-			cout << fillVert->numEdges << endl;
+			//cout << fillVert->numEdges << endl;
 			fillVert->head = vertexVector->at(index).head;
 			success = true;
 		}
