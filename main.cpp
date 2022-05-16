@@ -459,7 +459,7 @@ int main(int argc, char** argv){
 
 	cout << "printing the current graph... " << endl;
 	graph.printGraph();
-	graph.bFirst(ids[testdatasize-2]);
+	graph.bFirst(ids[testdatasize-4]);
 
 	return 0;
 }

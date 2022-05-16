@@ -305,10 +305,18 @@ void Graph::bFirst(int id){
 	visited[findIndex(id)] = true;
 	cout << vertexVector->at(findIndex(id)).id << endl;
 	traversalQueue.push(vertexVector->at(findIndex(id)).id);
-	while(!traversalQueue.empty()){
-		cout << " " << traversalQueue.front();
-		traversalQueue.pop();
 
+	while(!traversalQueue.empty()){
+		int u = traversalQueue.front();
+		traversalQueue.pop();
+		cout << u << " ";
+
+		for(auto vertexVector: vertexVector->at(findIndex(id)).head){
+			if(!visited[vertexVector]){
+				visited[vertexVector] = true;
+				traversalQueue.push_back(vertexVector);
+			}
+		}
 	}
 /*
 	int *n;
